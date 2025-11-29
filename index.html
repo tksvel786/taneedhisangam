@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thamizhaga Needhi Sangam - தமிழக நீதி சங்கம்</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, #8B0000 0%, #DC143C 100%);
+            color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .top-bar {
+            background: rgba(0,0,0,0.2);
+            padding: 8px 0;
+            font-size: 0.9rem;
+        }
+
+        .top-bar .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 10px; 
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Container for the new Banner/Nav layout */
+        .main-header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 10px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+        }
+
+        /* UPDATED: Banner Header Style - Reduced size and moved left */
+        .banner-header {
+            max-width: 500px; 
+            width: 100%;
+            background-color: white; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            flex-shrink: 0; 
+        }
+
+        .banner-header img {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-height: 120px; 
+            object-fit: contain; 
+        }
+        
+        /* UPDATED: Navigation (Menu) Styling - Moved right */
+        nav {
+            padding: 0; 
+            background: transparent; 
+            flex-grow: 1; 
+        }
+
+        nav .container {
+            max-width: none; 
+            margin: 0; 
+            padding: 0;
+            display: flex;
+            justify-content: flex-end; 
+            align-items: center;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px; 
+            list-style: none;
+            padding: 15px 0; 
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: opacity 0.3s;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        /* New Videos Section Styles */
+        .videos {
+            padding: 40px 20px;
+            background: #f0f0f0;
+        }
+
+        .videos .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .videos h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #8B0000;
+            margin-bottom: 30px;
+        }
+
+        .video-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .video-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+
+        .video-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Style for the embedded video container */
+        .video-embed-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio (100 / 16 * 9) */
+            height: 0;
+        }
+
+        .video-embed-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-info {
+            padding: 15px;
+        }
+
+        .video-info h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .video-info p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        /* End New Videos Section Styles */
+
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(139,0,0,0.9) 0%, rgba(220,20,60,0.9) 100%), 
+                        url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%238B0000" width="1200" height="600"/></svg>');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 40px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: white;
+            color: #8B0000;
+            font-weight: bold;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Stats Section */
+        .stats {
+            background: #f8f9fa;
+            padding: 60px 20px;
+        }
+
+        .stats .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #8B0000;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        /* About Section */
+        .about {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            color: #8B0000;
+            margin-bottom: 20px;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        .about-image {
+            background: linear-gradient(135deg, #8B0000 0%, #DC143C 100%);
+            height: 400px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        /* Programs Section */
+        .programs {
+            background: #f8f9fa;
+            padding: 80px 20px;
+        }
+
+        .programs .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .programs h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #8B0000;
+            margin-bottom: 50px;
+        }
+
+        .program-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .program-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .program-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .program-card h3 {
+            color: #8B0000;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+
+        .program-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* News Section */
+        .news {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .news h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            color: #8B0000;
+            margin-bottom: 50px;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .news-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: box-shadow 0.3s;
+        }
+
+        .news-card:hover {
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .news-image {
+            background: linear-gradient(135deg, #8B0000 0%, #DC143C 100%);
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .news-content {
+            padding: 20px;
+        }
+
+        .news-date {
+            color: #999;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .news-content h3 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .news-content p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 50px 20px 20px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h3 {
+            color: #DC143C;
+            margin-bottom: 20px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #DC143C;
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #333;
+            color: #999;
+        }
+
+        @media (max-width: 1000px) {
+            /* On smaller screens, stack the banner and nav */
+            .main-header-content {
+                flex-direction: column;
+                align-items: center;
+            }
+            .banner-header {
+                max-width: 100%; /* Go back to full width for mobile */
+                margin-bottom: 10px;
+            }
+            nav .container {
+                justify-content: center; /* Center links when stacked */
+            }
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 20px;
+            }
+        }
+        @media (max-width: 768px) {
+            .nav-links {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="top-bar">
+            <div class="container">
+                <div>📞 Contact: +91-44-1234-5678 | ✉️ infotns@gmail.org</div>
+                    <div>
+                        <a href="#" onclick="setLanguage('ta')" style="color:white;">தமிழ்</a> |
+                        <a href="#" onclick="setLanguage('en')" style="color:white;">English</a>
+                    </div>
+                </div>
+            </div>
+        </div>                
+    </header>
+        
+        <div class="main-header-content">
+            <div class="banner-header">
+                <img src="Tns-Header.jpg" alt="Tamilnadu Needhi Sangam - Dr. N. Karthikeyan" loading="eager">
+            </div>
+            <nav>
+                <div class="container">
+                    <ul class="nav-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#programs">Programs</a></li>
+                        <li><a href="#news">News</a></li>
+                        <li><a href="#videos">YouTube</a></li> 
+                        <li><a href="#join">Join Us</a></li>
+                    </ul>
+                </div>
+            </nav>
+            </div>
+    </header>
+
+    <section class="hero" id="home">
+        <h1>நீதியும் நேர்மையும் நம் நோக்கம்</h1>
+        <h1>Justice and Integrity for Tamil Nadu</h1>
+        <p>Building a progressive, prosperous, and equitable Tamil Nadu through transparent governance and people-centric policies</p>
+        <div class="cta-buttons">
+            <a href="#join" class="btn btn-primary">Become a Member</a>
+            <a href="#programs" class="btn btn-secondary">Our Vision</a>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="container">
+            <div class="stat-card">
+                <div class="stat-number">2.5M+</div>
+                <div class="stat-label">Party Members</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">234</div>
+                <div class="stat-label">Constituencies</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">15+</div>
+                <div class="stat-label">Years of Service</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">1000+</div>
+                <div class="stat-label">Social Programs</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="videos" id="videos">
+        <div class="container">
+            <h2>Our Latest YouTube Videos 🎥</h2>
+            <div class="video-list">
+                
+                <div class="video-card">
+                    <div class="video-embed-container">
+                        <iframe src="https://www.youtube.com/embed/<Video_ID_Here>" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>Dr. Karthikeyan's Speech on Education Reform</h3>
+                        <p>Published: Nov 10, 2025</p>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-embed-container">
+                        <iframe src="https://www.youtube.com/embed/<Video_ID_Here>" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>Ground Report: Farmer Welfare Initiative Success</h3>
+                        <p>Published: Oct 28, 2025</p>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-embed-container">
+                        <iframe src="https://www.youtube.com/embed/<Video_ID_Here>" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>Needhi Sangam Youth Wing Convention Highlights</h3>
+                        <p>Published: Oct 15, 2025</p>
+                    </div>
+                </div>
+
+                <div class="video-card">
+                    <div class="video-embed-container">
+                        <iframe src="https://www.youtube.com/embed/<Video_ID_Here>" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3>Vision for Chennai 2030: Infrastructure Plan</h3>
+                        <p>Published: Sep 30, 2025</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="about" id="about">
+        <div class="about-content">
+            <div class="about-text">
+                <h2>About Tamilnadu Needhi Sangam</h2>
+                <p>வணக்கம், நான் உங்கள் Dr கார்த்திகேயன். நிறுவனர்- தமிழக நீதி சங்கம். அணைத்து சமுதாயத்தினர்கள் நலனும் பாதுகாக்க படவேண்டும் என்ற நோக்கோடு ஆரம்பிக்கப்பட்டது தான் தமிழக நீதி சங்கம். ஒரு அண்ணனாக, உங்கள் வீட்டின் மகனாக நீங்கள் பிறந்த குடியின் வேரின் சிறப்பினை மற்றும் சாதிய அரசியல் புரிதலை உங்களோடு பகிர்ந்துக் கொள்கிறேன். ஒருதலைப் பட்ச சாதிய அரசியல் மீது கல்லெறிந்து உடைத்து காட்டுகிறேன்.  
+                   சரி ஏன் சாதி குறித்த புரிதல் வேண்டும்?</p>
+			    <p>ஏன் சாதி வேண்டாம் என்பதற்கே, சாதி என்றால் என்ன என்பதை தெரிந்து கொள்வது கட்டாயம் ஆகும். ஓட்டு அரசியலுக்காக சில சமுதாயத்தினர்களுக்கு மட்டுமே சமூக நீதியை அடமானம் வைத்து அரசியல் நடத்தும் கூட்டம் இருக்கும் வரை என்னுடைய குரல், உங்களுள் ஒருவனாக ஒளித்து கொண்டே இருக்கும்! "பயணிப்போம் கற்போம்" வாருங்கள்!</p>
+            </div>
+            <div class="about-image">
+                ⚖️
+            </div>
+        </div>
+    </section>
+
+    <section class="programs" id="programs">
+        <div class="container">
+            <h2>Our Key Initiatives</h2>
+            <div class="program-grid">
+                <div class="program-card">
+                    <h3>🎓 Education Excellence</h3>
+                    <p>Ensuring world-class education infrastructure, free quality education up to college level, and skill development programs to empower Tamil youth for global opportunities.</p>
+                </div>
+                <div class="program-card">
+                    <h3>🏥 Healthcare for All</h3>
+                    <p>Universal healthcare coverage, modernizing government hospitals, establishing medical colleges in every district, and ensuring affordable medicines for all citizens.</p>
+                </div>
+                <div class="program-card">
+                    <h3>💼 Employment Generation</h3>
+                    <p>Creating one million jobs through industrial development, startup ecosystem support, and infrastructure projects that boost economic growth across Tamil Nadu.</p>
+                </div>
+                <div class="program-card">
+                    <h3>🌾 Farmer Welfare</h3>
+                    <p>Guaranteed minimum support price, crop insurance, modern agricultural techniques, and direct financial support to ensure prosperity for our farming community.</p>
+                </div>
+                <div class="program-card">
+                    <h3>👩 Women Empowerment</h3>
+                    <p>50% reservation in local bodies, women safety initiatives, entrepreneurship support, and equal opportunities in all sectors of society.</p>
+                </div>
+                <div class="program-card">
+                    <h3>🏛️ Tamil Heritage</h3>
+                    <p>Preserving and promoting Tamil language, literature, arts, and culture while integrating traditional wisdom with modern development goals.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="news" id="news">
+        <h2>Latest News & Updates</h2>
+        <div class="news-grid">
+            <div class="news-card">
+                <div class="news-image">📰</div>
+                <div class="news-content">
+                    <div class="news-date">November 15, 2025</div>
+                    <h3>State-Wide Membership Drive Launched</h3>
+                    <p>Tamilnadu Needhi Sangam launches massive membership campaign across all 234 constituencies to strengthen grassroots presence.</p>
+                </div>
+            </div>
+            <div class="news-card">
+                <div class="news-image">🎤</div>
+                <div class="news-content">
+                    <div class="news-date">November 12, 2025</div>
+                    <h3>Youth Convention in Chennai</h3>
+                    <p>Over 50,000 youth participants gather to discuss employment opportunities, education reforms, and technological innovation for Tamil Nadu.</p>
+                </div>
+            </div>
+            <div class="news-card">
+                <div class="news-image">🤝</div>
+                <div class="news-content">
+                    <div class="news-date">November 10, 2025</div>
+                    <h3>Farmer Relief Program Announced</h3>
+                    <p>Party leadership announces comprehensive relief package for farmers affected by recent weather conditions, including loan waivers and compensation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="programs" id="join" style="background: linear-gradient(135deg, #8B0000 0%, #DC143C 100%); color: white;">
+        <div class="container" style="text-align: center;">
+            <h2 style="color: white;">Join Our Movement</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 30px; max-width: 800px; margin-left: auto; margin-right: auto;">
+                Be part of the change you want to see in Tamil Nadu. Join Tamilnadu Needhi Sangam and contribute to building a just, prosperous, and progressive state for future generations.
+            </p>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary">Register as Member</a>
+                <a href="#" class="btn btn-secondary">Volunteer with Us</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Tamilnadu Needhi Sangam</h3>
+                <p>Working towards a just and prosperous Tamil Nadu through transparent governance and people-first policies.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#programs">Our Programs</a></li>
+                    <li><a href="#news">News & Updates</a></li>
+                    <li><a href="#videos">YouTube</a></li>
+                    <li><a href="#join">Membership</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Get Involved</h3>
+                <ul>
+                    <li><a href="#">Volunteer</a></li>
+                    <li><a href="#">Donate</a></li>
+                    <li><a href="#">Events</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect With Us</h3>
+                <ul>
+                    <li><a href="#">Facebook</a></li>
+                    <li><a href="#">Twitter</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">YouTube</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Tamilnadu Needhi Sangam. All Rights Reserved. | Privacy Policy | Terms of Service</p>
+        </div>
+    </footer>
+</body>
+</html>
